@@ -1,10 +1,6 @@
-"use client";
-
-import { useTheme } from "next-themes";
 import LeftPanel from "./components/leftPanel";
 import RightPanel from "./components/rightPanel";
 export default function Home() {
-	const { setTheme } = useTheme();
 
 	return (
 		<main className='m-5'>
