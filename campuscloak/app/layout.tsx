@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "./providers/themeProvide";
 import "./globals.css";
 import { ConvexClientProvider } from "./providers/convexClientProvider";
-
+import { Toaster } from "react-hot-toast";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -30,6 +30,7 @@ export default function RootLayout({
       <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
         <ConvexClientProvider>
         {children}
+        <Toaster />
         </ConvexClientProvider>
       </ThemeProvider>
       </body>
