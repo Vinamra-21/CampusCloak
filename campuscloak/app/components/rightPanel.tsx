@@ -5,12 +5,13 @@ import MessageInput from "./home/messageInput";
 import MessageContainer from "./home/messageContainer";
 import ChatPlaceHolder from "./home/chatPlaceholder";
 import GroupMembersDialog from "./home/groupMembersDialog";
+import { useConversationStore } from "../store/chatStore";
 
 const RightPanel = () => {
-	const selectedConversation = true;
+	const { selectedConversation,setSelectedConversation } = useConversationStore();
 	if (!selectedConversation) return <ChatPlaceHolder />;
 
-	const conversationName = "John Doe";
+	const conversationName = selectedConversation.groupName || selectedConversation.name;
 	const isGroup = true;
 
 	return (
@@ -35,7 +36,7 @@ const RightPanel = () => {
 						<a href='/video-call' target='_blank'>
 							<Video size={23} />
 						</a>
-						<X size={16} className='cursor-pointer' />
+						<X size={16} className='cursor-pointer' onClick={()=>setSelectedConversation(null)} />
 					</div>
 				</div>
 			</div>

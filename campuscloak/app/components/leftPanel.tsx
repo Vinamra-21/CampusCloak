@@ -3,12 +3,13 @@ import { ListFilter, LogOut, MessageSquareDiff, Search, User } from "lucide-reac
 import { Input } from './input';
 import ThemeSwitch from './theme-switch';
 import Conversation from './conversation';
-import { conversations } from '../dummyData/db';
 import { UserButton } from "@clerk/nextjs";
 import UserListDialog from "./home/userListDialog";
-import { useConvexAuth } from "convex/react";
+import { useConvexAuth, useQuery } from "convex/react";
+import {api} from "../../convex/_generated/api";
 const LeftPanel = () => {
 	const {isAuthenticated} = useConvexAuth();
+	const conversations=useQuery(api.conversations.getMyConversations, isAuthenticated ? undefined :"skip");
 
 	return (
 		<div className='w-1/4 border-gray-600 border-r'>
@@ -43,7 +44,7 @@ const LeftPanel = () => {
 			{/* Chat List */}
 			<div className='my-3 flex flex-col gap-0 max-h-[80%] overflow-auto'>
 				{/* Conversations will go here*/}
-				{conversations.map((conversation) => (
+				{conversations?.map((conversation) => (
 					<Conversation key={conversation._id} conversation={conversation} />
 					))}
 
